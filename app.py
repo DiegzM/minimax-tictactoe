@@ -31,8 +31,10 @@ def game():
     if 'mode' not in session:
         session['mode'] = 'x'
     mode = session['mode']
-    opponent = ''
+    if 'depth' not in session:
+        session['depth'] = 3
     depth = session['depth']
+    opponent = ''
 
     if mode == 'o':
         opponent = 'x'
