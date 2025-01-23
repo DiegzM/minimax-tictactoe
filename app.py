@@ -4,7 +4,7 @@ import random
 from functions import reset_grid, ai_move, check_win
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24) 
+app.secret_key = os.environ.get("SECRET_KEY", "fallback-secret-key")
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -96,8 +96,7 @@ def game():
             else:
                 grid = reset_grid()
         elif request.form.get('quit'):
-            grid = reset_grid()
-            session['grid'] = grid
+            session.clear()
             return redirect('/')
 
         session['grid'] = grid
